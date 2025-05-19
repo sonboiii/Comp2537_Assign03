@@ -1,24 +1,45 @@
 body {
   margin: 0px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 #game_grid {
-  border: 2px tomato solid;
-  width: 600px;
-  height: 400px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 10px;
+  justify-items: center;
+  padding: 10px;
+  max-width: 700px;
   margin: auto;
-  display: flex;
-  flex-wrap: wrap;
+  border: 2px solid tomato;
+  background-color: #f8f9fa;
+  transition: background-color 0.3s;
+}
+
+#game_grid.easy {
+  max-width: 700px;
+}
+
+#game_grid.medium {
+  max-width: 900px;
+}
+
+#game_grid.hard {
+  max-width: 1500px;
 }
 
 
+
 .card {
-  width: 33.3%;
+  width: 200px;
+  height: 200px;
   position: relative;
   transition: transform 1s;
   perspective: 1000px;
   transform-style: preserve-3d;
+  cursor: pointer;
 }
+
 
 
 img {
@@ -39,4 +60,28 @@ img {
 
 .front_face {
   transform: rotateY(180deg);
+}
+
+#message {
+  margin-top: 20px;
+}
+
+/* Dark mode for grid and cards */
+#game_grid.dark {
+  background-color: #1c1c1c;
+  border-color: #444;
+  box-shadow: 0 0 15px #000;
+}
+
+#game_grid.dark .card {
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  background-color: #2c2c2c;
+  border: 1px solid #555;
+}
+
+#game_grid.dark .front_face,
+#game_grid.dark .back_face {
+  background-color: #2c2c2c;
+  border: 1px solid #555;
+  filter: brightness(0.9);
 }
