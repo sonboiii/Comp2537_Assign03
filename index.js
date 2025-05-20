@@ -11,13 +11,16 @@ function setup() {
 
 
   function handleCardClick() {
+    // prevent flipping if the card is already flipped
     if (lockBoard || $(this).hasClass("flip")) return;
 
     clickCount++;
     updateStatus();
 
+    // flip the card
     $(this).addClass("flip");
 
+    // check the first and second card clicked
     if (!firstCard) {
       firstCard = $(this);
     } else {
@@ -65,7 +68,7 @@ function setup() {
           firstCard.removeClass("flip");
           secondCard.removeClass("flip");
           resetBoardState();
-          matchStreak = 0; // reset streak on failure
+          matchStreak = 0;
         }, 1000);
       }
     }
@@ -77,6 +80,7 @@ function setup() {
   }
 
   function updateStatus() {
+    // Status update logic
     $("#click-count").text(`Clicks: ${clickCount}`);
     $("#pairs-matched").text(`Matched: ${matchedPairs}`);
     $("#pairs-left").text(`Left: ${totalPairs - matchedPairs}`);
@@ -102,6 +106,7 @@ function setup() {
   async function fetchAndLoadCards(pairCount) {
     const offset = Math.floor(Math.random() * 1000);
     const limit = pairCount * 2;
+    // Fetch pokemon data from the API
 
     const res = await fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}`);
     const data = await res.json();
@@ -171,6 +176,7 @@ function setup() {
     await fetchAndLoadCards(totalPairs);
   }
 
+  // buttons logic
   $("#themeToggle").on("change", function () {
     $("#game_grid").toggleClass("dark");
   });
